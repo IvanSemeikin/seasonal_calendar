@@ -62,8 +62,18 @@ if response.status_code == 200:
 else:
     st.write(f"Запрос не отработан: {response.status_code}")
 
+# Создаем выпадающий список для 'name'
+selected_name = st.selectbox('Выберите категорию по названию:', [item['name'] for item in filtered_data])
 
-# # In[3]:
+# Создаем выпадающий список для 'path' на основе выбранного 'name'
+selected_data = next(item for item in filtered_data if item['name'] == selected_name)
+selected_path = st.selectbox('Выберите путь категории:', [selected_data['path']])
+
+# Выводим выбранные значения
+st.write('Выбранное название:', selected_name)
+st.write('Выбранный путь:', selected_path)
+
+# **********************************************************************************************************************************
 
 
 # # Загружаем файл категорий
