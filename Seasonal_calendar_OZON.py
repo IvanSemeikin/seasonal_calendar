@@ -61,6 +61,7 @@ def podkluchenie_k_api():
             
         # print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
         st.write(filtered_data)
+        st.write(formatted_data)
     else:
         st.write(f"Запрос не отработан: {response.status_code}")
     return filtered_data
@@ -81,7 +82,7 @@ def poluchenie_categoriy(list1):
 # **********************************************************************************************************************************
 # Функции
 data_api = podkluchenie_k_api()
-poluchenie_categoriy(data_api)
+# poluchenie_categoriy(data_api)
 
 # **********************************************************************************************************************************
 
