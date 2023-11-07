@@ -26,7 +26,7 @@ import streamlit as st
 st.title('Сезонный календарь OZON')
 # Список категорий
 # **********************************************************************************************************************************
-@st.cache_data
+# @st.cache_data
 def podkluchenie_k_api():
     url = 'http://mpstats.io/api/oz/get/categories'  #oz/get/categories
     headers = {
@@ -65,7 +65,7 @@ def podkluchenie_k_api():
     # Выводим выбранные значения
     st.write('Выбранное название:', selected_name)
     st.write('Выбранный путь:', selected_path)
-    return filtered_data    
+    return filtered_data
 
 # **********************************************************************************************************************************
 # категории
@@ -79,9 +79,10 @@ def all_categories_1():
     return cat
 # **********************************************************************************************************************************
 # Функции
+spisok_cat_1 = all_categories_1()
 data_api = podkluchenie_k_api()
 # poluchenie_categoriy(data_api)
-spisok_cat_1 = all_categories_1()
+
 # **********************************************************************************************************************************
 # # Обращение за данными катеории по api без функции
 # import xlsxwriter
