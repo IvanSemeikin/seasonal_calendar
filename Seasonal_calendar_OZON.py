@@ -48,18 +48,6 @@ def podkluchenie_k_api():
         ]
         
         filtered_data = [item for item in formatted_data if item['path'].count('/') == 1 and  not item['path'].startswith('Акции')]   
-        # если берем все подкатегории, то убрать условие выше
-    
-        # csv_filename = "Категории OZON второго уровня без акций.csv"
-        # with open(csv_filename, mode='w', newline='', encoding='utf-8') as csv_file:
-        #     fieldnames = ['url', 'name', 'path']
-        #     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            
-        #     writer.writeheader()
-        #     for row in filtered_data: # если берем всё, а не только короткие названия, то изм на formatted_data 
-        #         writer.writerow(row)
-            
-        # print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
         st.write(filtered_data)
         st.write(formatted_data)
     else:
@@ -76,36 +64,21 @@ def poluchenie_categoriy(list1):
     
     # Выводим выбранные значения
     st.write('Выбранное название:', selected_name)
-    st.write('Выбранный путь:', selected_path)
+    # st.write('Выбранный путь:', selected_path)
     
 
 # **********************************************************************************************************************************
 # Функции
 data_api = podkluchenie_k_api()
-# poluchenie_categoriy(data_api)
+poluchenie_categoriy(data_api)
 
 # **********************************************************************************************************************************
-
-# # Загружаем файл категорий
-# # categories = pd.read_csv('/Users/iv18s/Desktop/Champ Commerce/Категории OZON второго уровня без акций.csv', sep = ',')  #iv18s\Desktop\Champ Commerce
-# # разделитель - запятая!
-
-
-# # In[5]:
-
-
-# categories
-
-
-# # In[5]:
-
-
-# pip install xlsxwriter
-
-
-# # In[7]:
-
-
+# категории
+cat = ['Ozon fresh', 'Автомобили', 'Автотовары', 'Аксессуары', 'Антиквариат и коллекционирование', 'Аптека', 'Билеты, отели, туры', 'Бытовая техника', 'Бытовая химия и гигиена', 
+       'Детские товары', 'Дом и сад', 'Игры и консоли', 'Канцелярские товары', 'Книги', 'Красота и здоровье', 'Мебель', 'Музыка и видео', 'Обувь', 'Одежда', 'Продукты питания', 
+       'Спорт и отдых', 'Строительство и ремонт', 'Товары для взрослых', 'Товары для животных', 'Товары для курения и аксессуары', 'Туризм, рыбалка, охота', 'Хобби и творчество', 
+       'Цифровые товары', 'Электроника', 'Ювелирные украшения']
+st.write(cat)
 # # Обращение за данными катеории по api без функции
 # import xlsxwriter
 # from xlsxwriter import Workbook
