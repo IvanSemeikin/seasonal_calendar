@@ -21,9 +21,9 @@ import math
 from datetime import datetime
 import os
 import glob
+import streamlit as st
 
-
-
+st.title('Сезонный календарь OZON')
 # Список категорий
 # **********************************************************************************************************************************
 url = 'http://mpstats.io/api/oz/get/categories'  #oz/get/categories
