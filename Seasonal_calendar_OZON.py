@@ -49,10 +49,10 @@ def podkluchenie_k_api():
         
         filtered_data = [item for item in formatted_data if item['path'].count('/') == 1 and  not item['path'].startswith('Акции')]   
         st.write(filtered_data)
-        st.write(formatted_data)
+        # st.write(formatted_data)
     else:
         st.write(f"Запрос не отработан: {response.status_code}")
-    return filtered_data
+    # return filtered_data
     
 # def poluchenie_categoriy(list1):
     # Создаем выпадающий список для 'name'
@@ -64,7 +64,7 @@ def podkluchenie_k_api():
     
     # Выводим выбранные значения
     st.write('Выбранное название:', selected_name)
-    # st.write('Выбранный путь:', selected_path)
+    st.write('Выбранный путь:', selected_path)
     
 
 # **********************************************************************************************************************************
