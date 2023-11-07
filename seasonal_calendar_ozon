@@ -1,0 +1,56 @@
+import requests
+import json
+import csv
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from openpyxl import Workbook, load_workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.drawing.image import Image
+from openpyxl.styles import NamedStyle
+from openpyxl.styles import Color, PatternFill, Font
+
+
+import math
+from datetime import datetime
+import os
+import glob
+
+url = 'http://mpstats.io/api/oz/get/categories'  #oz/get/categories
+headers = {
+    'X-Mpstats-TOKEN': '64ee0e4f67a005.746995831774b14d378d3e3022e4e2f8a3698042',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    data = response.json()
+    formatted_data = [
+        {
+            "url": category.get("url"),
+            "name": category.get("name"),
+            "path": category.get("path")
+        }
+        for category in data
+    ]
+    
+    filtered_data = [item for item in formatted_data if item['path'].count('/') == 1 and  not item['path'].startswith('Акции')]   
+    # если берем все подкатегории, то убрать условие выше
+
+    csv_filename = "Категории OZON второго уровня без акций.csv"
+    with open(csv_filename, mode='w', newline='', encoding='utf-8') as csv_file:
+        fieldnames = ['url', 'name', 'path']
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        
+        writer.writeheader()
+        for row in filtered_data: # если берем всё, а не только короткие названия, то изм на formatted_data 
+            writer.writerow(row)
+        
+    print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
+    display(filtered_data)
+else:
+    print(f"Запрос не отработан: {response.status_code}")
+
