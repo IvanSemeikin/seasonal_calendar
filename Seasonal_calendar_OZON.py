@@ -54,7 +54,7 @@ def podkluchenie_k_api():
         st.write(f"Запрос не отработан: {response.status_code}")
     return filtered_data
     
-def poluchenie_categoriy(list1):
+# def poluchenie_categoriy(list1):
     # Создаем выпадающий список для 'name'
     selected_name = st.selectbox('Выберите категорию по названию:', [item['name'] for item in filtered_data])
     
@@ -70,7 +70,7 @@ def poluchenie_categoriy(list1):
 # **********************************************************************************************************************************
 # Функции
 data_api = podkluchenie_k_api()
-poluchenie_categoriy(data_api)
+# poluchenie_categoriy(data_api)
 
 # **********************************************************************************************************************************
 # категории
