@@ -26,55 +26,64 @@ import streamlit as st
 st.title('Сезонный календарь OZON')
 # Список категорий
 # **********************************************************************************************************************************
-url = 'http://mpstats.io/api/oz/get/categories'  #oz/get/categories
-headers = {
-    'X-Mpstats-TOKEN': '64ee0e4f67a005.746995831774b14d378d3e3022e4e2f8a3698042',
-    'Content-Type': 'application/json'
-}
-
-response = requests.get(url, headers=headers)
-
-if response.status_code == 200:
-    data = response.json()
-    formatted_data = [
-        {
-            "url": category.get("url"),
-            "name": category.get("name"),
-            "path": category.get("path")
-        }
-        for category in data
-    ]
+@st.cache_data
+def podkluchenie_k_api():
+    url = 'http://mpstats.io/api/oz/get/categories'  #oz/get/categories
+    headers = {
+        'X-Mpstats-TOKEN': '64ee0e4f67a005.746995831774b14d378d3e3022e4e2f8a3698042',
+        'Content-Type': 'application/json'
+    }
     
-    filtered_data = [item for item in formatted_data if item['path'].count('/') == 1 and  not item['path'].startswith('Акции')]   
-    # если берем все подкатегории, то убрать условие выше
-
-    # csv_filename = "Категории OZON второго уровня без акций.csv"
-    # with open(csv_filename, mode='w', newline='', encoding='utf-8') as csv_file:
-    #     fieldnames = ['url', 'name', 'path']
-    #     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        data = response.json()
+        formatted_data = [
+            {
+                "url": category.get("url"),
+                "name": category.get("name"),
+                "path": category.get("path")
+            }
+            for category in data
+        ]
         
-    #     writer.writeheader()
-    #     for row in filtered_data: # если берем всё, а не только короткие названия, то изм на formatted_data 
-    #         writer.writerow(row)
-        
-    # print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
-    st.write(filtered_data)
-else:
-    st.write(f"Запрос не отработан: {response.status_code}")
-
-# Создаем выпадающий список для 'name'
-selected_name = st.selectbox('Выберите категорию по названию:', [item['name'] for item in filtered_data])
-
-# Создаем выпадающий список для 'path' на основе выбранного 'name'
-selected_data = next(item for item in filtered_data if item['name'] == selected_name)
-selected_path = st.selectbox('Выберите путь категории:', [selected_data['path']])
-
-# Выводим выбранные значения
-st.write('Выбранное название:', selected_name)
-st.write('Выбранный путь:', selected_path)
+        filtered_data = [item for item in formatted_data if item['path'].count('/') == 1 and  not item['path'].startswith('Акции')]   
+        # если берем все подкатегории, то убрать условие выше
+    
+        # csv_filename = "Категории OZON второго уровня без акций.csv"
+        # with open(csv_filename, mode='w', newline='', encoding='utf-8') as csv_file:
+        #     fieldnames = ['url', 'name', 'path']
+        #     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            
+        #     writer.writeheader()
+        #     for row in filtered_data: # если берем всё, а не только короткие названия, то изм на formatted_data 
+        #         writer.writerow(row)
+            
+        # print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
+        st.write(filtered_data)
+    else:
+        st.write(f"Запрос не отработан: {response.status_code}")
+    return filtered_data
+    
+def poluchenie_categoriy(list1):
+    # Создаем выпадающий список для 'name'
+    selected_name = st.selectbox('Выберите категорию по названию:', [item['name'] for item in filtered_data])
+    
+    # Создаем выпадающий список для 'path' на основе выбранного 'name'
+    selected_data = next(item for item in filtered_data if item['name'] == selected_name)
+    selected_path = st.selectbox('Выберите путь категории:', [selected_data['path']])
+    
+    # Выводим выбранные значения
+    st.write('Выбранное название:', selected_name)
+    st.write('Выбранный путь:', selected_path)
+    
 
 # **********************************************************************************************************************************
+# Функции
+data_api = podkluchenie_k_api()
+poluchenie_categoriy(data_api)
 
+# **********************************************************************************************************************************
 
 # # Загружаем файл категорий
 # # categories = pd.read_csv('/Users/iv18s/Desktop/Champ Commerce/Категории OZON второго уровня без акций.csv', sep = ',')  #iv18s\Desktop\Champ Commerce
