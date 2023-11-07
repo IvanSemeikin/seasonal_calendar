@@ -58,9 +58,9 @@ if response.status_code == 200:
     #         writer.writerow(row)
         
     # print(f"Данные успешно записаны в CSV файл: '{csv_filename}'")
-    display(filtered_data)
+    st.write(filtered_data)
 else:
-    print(f"Запрос не отработан: {response.status_code}")
+    st.write(f"Запрос не отработан: {response.status_code}")
 
 
 # # In[3]:
