@@ -483,8 +483,7 @@ def plot_total_data(df):
         yaxis='y2',
         width=bar_width
     ))
- # !!*********************************************************************************************************
-     fig_combined.add_trace(go.Scatter(
+    fig_combined.add_trace(go.Scatter(
         x=df.index + bar_width/2,  # Сдвиг вправо на половину ширины столбца
         y=df['Avg Bill'],
         mode='lines'
