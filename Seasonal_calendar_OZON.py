@@ -12,7 +12,7 @@ data = {'День': [1, 2, 3, 4, 5],
 df = pd.DataFrame(data)
 
 # Создаем график с тремя осями
-fig = sp.make_subplots(rows=1, cols=1, specs=[[{'secondary_y': True}]])
+fig = go.Figure()
 
 # Добавляем столбцы для Продаж
 fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', marker_color='blue'))
@@ -27,7 +27,7 @@ fig.add_trace(go.Scatter(x=df['День'], y=df['Средний_чек'], mode='
 fig.update_layout(title='График продаж, выручки и среднего чека',
                   yaxis=dict(title='Продажи', showgrid=False),
                   yaxis2=dict(title='Выручка', showgrid=False, overlaying='y', side='right'),
-                  yaxis3=dict(title='Средний чек', showgrid=False, overlaying='y2', side='right'))
+                  yaxis3=dict(title='Средний чек', showgrid=False, overlaying='y', side='right'))
 
 # Отображаем график в Streamlit
 st.plotly_chart(fig, use_container_width=True)
