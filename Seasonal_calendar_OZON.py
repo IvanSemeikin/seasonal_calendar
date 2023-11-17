@@ -74,7 +74,7 @@ def merge_excel_files_sales(folder_path):
 
     return merged_df
  
-@st.cache_data()
+# @st.cache_data()
 def merge_excel_files_revenue(folder_path):
     # Создаем пустой датафрейм
     merged_df = pd.DataFrame()
@@ -159,7 +159,7 @@ def final_obrabotka(dataset_3):
 
 # _______________________________________ функция календаря сезонности
 
-@st.cache_data()
+# @st.cache_data()
 
 def seasonal_calendar(df):
 
