@@ -40,7 +40,7 @@ for file_name in os.listdir(folder_path_ozon):
         ozon[key] = df_ozon
 
 # ________________________________________________________ загрузка и обработка данных для топ категорий от Вани
-@st.cache_data()
+# @st.cache_data()
 def merge_excel_files_sales(folder_path):
     # Создаем пустой датафрейм
     merged_df = pd.DataFrame()
