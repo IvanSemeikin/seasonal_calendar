@@ -879,7 +879,7 @@ if platform == 'Wildberries':
       st.dataframe(total_data)
       st.plotly_chart(fig_total_sales)
       st.plotly_chart(fig_total_revenue)
-      st.plotly_chart(fig_combined, use_container_width=True)           
+      st.plotly_chart(fig_combined)           
  
  
  elif report_type == 'Топовые категории':
@@ -1016,7 +1016,7 @@ if platform == 'Wildberries':
             st.dataframe(total_data)
             st.plotly_chart(fig_total_sales)
             st.plotly_chart(fig_total_revenue)
-            st.plotly_chart(fig_combined, use_container_width=True)
+            st.plotly_chart(fig_combined)
 
 
 
