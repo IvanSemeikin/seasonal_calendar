@@ -483,12 +483,23 @@ def plot_total_data(df):
         yaxis='y2',
         width=bar_width
     ))
+ # !!*********************************************************************************************************
+     fig_combined.add_trace(go.Scatter(
+        x=df.index + bar_width/2,  # Сдвиг вправо на половину ширины столбца
+        y=df['Avg Bill'],
+        mode='lines'
+        name='Avg Bill',
+        marker_color='pink',
+        yaxis='y3',
+        width=bar_width
+    ))
 
     fig_combined.update_layout(
         title='Общие продажи и выручка по годам',
         xaxis=dict(title='Год', tickmode='array', tickvals=df.index),
         yaxis=dict(title='Общие продажи', side='left'),
         yaxis2=dict(title='Общая выручка', side='right', overlaying='y', showgrid=False),
+        yaxis3=dict(title='', side='right', overlaying='y', showgrid=False, showticklabels=False),
         barmode='group'
     )
 
@@ -869,7 +880,7 @@ if platform == 'Wildberries':
       st.dataframe(total_data)
       st.plotly_chart(fig_total_sales)
       st.plotly_chart(fig_total_revenue)
-      st.plotly_chart(fig_combined)           
+      st.plotly_chart(fig_combined, use_container_width=True)           
  
  
  elif report_type == 'Топовые категории':
@@ -1006,7 +1017,7 @@ if platform == 'Wildberries':
             st.dataframe(total_data)
             st.plotly_chart(fig_total_sales)
             st.plotly_chart(fig_total_revenue)
-            st.plotly_chart(fig_combined)
+            st.plotly_chart(fig_combined, use_container_width=True)
 
 
 
