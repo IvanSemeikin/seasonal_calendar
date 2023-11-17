@@ -14,7 +14,7 @@ import io
 from io import BytesIO
 from PIL import Image
 from openpyxl.drawing.image import Image as OpenpyxlImage
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 # ________________________________________________________ чтение файлов с гитхаба
