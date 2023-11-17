@@ -15,7 +15,7 @@ df = pd.DataFrame(data)
 fig = go.Figure()
 
 # Добавляем столбцы для Продаж
-fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', yaxis='y1', marker=dict(color=[0, 1, 2], colorscale='Rainbow'), width=0.4))  # colorscale='Viridis'  marker_color='blue'
+fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', yaxis='y1', marker_color='purple', width=0.4)) 
 
 # Создаем вторую ось для Выручки
 fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка', yaxis='y2', marker_color='red', width=0.4, offset=0.2))
