@@ -15,10 +15,10 @@ df = pd.DataFrame(data)
 fig = go.Figure()
 
 # Добавляем столбцы для Продаж
-fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', marker_color='blue'))
+fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', marker_color='blue', width=0.4))
 
 # Создаем вторую ось для Выручки
-fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка', yaxis='y2', marker_color='orange'))
+fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка', yaxis='y2', marker_color='orange', width=0.4))
 
 # Создаем третью ось для Среднего чека
 fig.add_trace(go.Scatter(x=df['День'], y=df['Средний_чек'], mode='lines', name='Средний чек', yaxis='y3', marker_color='green'))
