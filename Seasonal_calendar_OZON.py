@@ -14,7 +14,7 @@ df = pd.DataFrame(data)
 # Создаем график с тремя осями
 fig = sp.make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи'), secondary_y=False)
-fig.add_trace(go.Scatter(x=df['День'], y=df['Выручка'], mode='lines', name='Выручка'), secondary_y=True)
+fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка'), secondary_y=False)
 fig.add_trace(go.Scatter(x=df['День'], y=df['Средний_чек'], mode='lines', name='Средний чек'), secondary_y=True)
 
 # Настройка макета
