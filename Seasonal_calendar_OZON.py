@@ -18,7 +18,7 @@ fig = go.Figure()
 fig.add_trace(go.Bar(x=df['День'], y=df['Продажи'], name='Продажи', yaxis='y1', marker_color='blue', width=0.4))
 
 # Создаем вторую ось для Выручки
-fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка', yaxis='y2', marker_color='orange', width=0.4, offset=0.0))
+fig.add_trace(go.Bar(x=df['День'], y=df['Выручка'], name='Выручка', yaxis='y2', marker_color='orange', width=0.4, offset=0.2))
 
 # Создаем третью ось для Среднего чека
 fig.add_trace(go.Scatter(x=df['День'], y=df['Средний_чек'], mode='lines', name='Средний чек', yaxis='y3', marker_color='green'))
