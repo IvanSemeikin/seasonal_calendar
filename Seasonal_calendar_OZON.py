@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import altair as alt
 
 # Пример данных
 data = {'День': [1, 2, 3, 4, 5],
@@ -11,15 +11,34 @@ data = {'День': [1, 2, 3, 4, 5],
 df = pd.DataFrame(data)
 
 # Строим график с тремя осями
-fig = px.bar(df, x='День', y='Продажи', color='Продажи', title='График продаж')
-
-fig.update_layout(
-    yaxis=dict(title='Продажи', side='left', showgrid=False),
-    yaxis2=dict(title='Выручка', side='right', overlaying='y', showgrid=False),
-    yaxis3=dict(title='Средний чек', side='right', overlaying='y', showgrid=False, anchor='free', position=0.9),
+chart = alt.Chart(df).mark_bar().encode(
+    x='День',
+    y='Продажи',
+    color=alt.value('blue')
+).properties(
+    title='График продаж, выручки и среднего чека'
 )
 
-fig.show()
+# Добавляем вспомогательные оси для выручки и среднего чека
+revenue_axis = alt.Axis(title='Выручка', grid=False, position='right')
+average_check_axis = alt.Axis(title='Средний чек', grid=False, position='right', offset=50)
+
+chart = chart.encode(
+    y='Выручка:Q',
+    color=alt.value('orange')
+).add_selection(
+    alt.selection_single(bind='legend', fields=['axis'], init={'axis': 'left'})
+).transform_fold(
+    ['Продажи', 'Выручка', 'Средний_чек'],
+    as_=['axis', 'value']
+).transform_calculate(
+    "axis", alt.expr.if_(alt.datum.axis == "Средний_чек", "right", "left")
+).encode(
+    y=alt.Y('value:Q', axis=alt.Axis(title='Продажи', grid=False)),
+    color=alt.Color('axis:N', legend=None)
+).properties(
+    height=300
+)
 
 # Отображаем график в Streamlit
-st.plotly_chart(fig, use_container_width=True)
+st.altair_chart(chart, use_container_width=True)
