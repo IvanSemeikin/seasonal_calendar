@@ -25,9 +25,9 @@ fig.add_trace(go.Scatter(x=df['День'] + 0.2, y=df['Средний_чек'], 
 
 # Настройка макета
 fig.update_layout(title='График продаж, выручки и среднего чека', 
-                  yaxis=dict(title='Продажи', showgrid=False), 
-                  yaxis2=dict(title='Выручка', showgrid=False, overlaying='y', side='right'), 
-                  yaxis3=dict(title='Средний чек', showgrid=False, overlaying='y', side='right'), 
-                  margin=dict(l=50, r=50, b=50, t=50))  # Настройка отступов - l, r, b, t (left, right, bottom, top) 
+                  yaxis=dict(title='Продажи', showgrid=False, automargin=True), 
+                  yaxis2=dict(title='Выручка', showgrid=False, overlaying='y', side='right', automargin=True), 
+                  yaxis3=dict(title='Средний чек', showgrid=False, overlaying='y', side='right', automargin=True)) 
+                  # margin=dict(l=50, r=50, b=50, t=50))  # Настройка отступов - l, r, b, t (left, right, bottom, top) 
 # Отображаем график в Streamlit
 st.plotly_chart(fig, use_container_width=True)
