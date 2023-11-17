@@ -490,7 +490,6 @@ def plot_total_data(df):
         name='Avg Bill',
         marker_color='pink',
         yaxis='y3',
-        width=bar_width
     ))
 
     fig_combined.update_layout(
